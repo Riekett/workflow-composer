@@ -2,10 +2,18 @@ import { useState, useRef } from "react";
 import {
   Database, FileSpreadsheet, Brain, Mail, Play, RotateCcw,
   TrendingUp, Building2, Scale, Zap, Truck, CheckCircle2, Loader2,
-  ArrowRight, Sparkles, Settings, Radio, AlertCircle
+  ArrowRight, Sparkles, Settings, Radio, AlertCircle, ShieldCheck
 } from "lucide-react";
 
 const CATEGORIES = [
+  {
+    id: "insurance",
+    label: "Versicherer-Controlling",
+    icon: ShieldCheck,
+    sources: [
+      { id: "bund10y", name: "Zinsumfeld 10Y AAA", provider: "EZB Yield Curve", desc: "Solvency-II Risk-Free Rate, daily aktualisiert", live: true, webhook: "bund10y" },
+    ],
+  },
   {
     id: "finance",
     label: "Finanzen",
@@ -62,6 +70,16 @@ const CATEGORIES = [
 ];
 
 const SOURCE_OUTPUTS = {
+  bund10y: {
+    excelHeaders: ["Datum", "Rendite", "Δ Vortag", "ISO-Datum"],
+    excelRows: [
+      ["21.05.2026", "3,14 %", "-5 bp", "2026-05-21"],
+      ["20.05.2026", "3,19 %", "-3 bp", "2026-05-20"],
+      ["19.05.2026", "3,22 %", "+5 bp", "2026-05-19"],
+    ],
+    analysis: "Mock-Daten — Live-Backend liefert echte Versicherer-Analyse via EZB Yield Curve und KI (Solvency-II Risk-Free Rate, ALM-Empfehlungen).",
+    subject: "Zinsumfeld-Briefing Euro AAA 10Y — Mai 2026",
+  },
   gold: {
     excelHeaders: ["Datum", "Gold USD/oz", "Δ Vortag", "30T-Trend"],
     excelRows: [
@@ -253,7 +271,7 @@ const NODE_STEPS = [
 ];
 
 export default function App() {
-  const [activeCategory, setActiveCategory] = useState("finance");
+  const [activeCategory, setActiveCategory] = useState("insurance");
   const [droppedSource, setDroppedSource] = useState(null);
   const [dragOver, setDragOver] = useState(false);
   const [running, setRunning] = useState(false);
