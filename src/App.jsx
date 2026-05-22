@@ -12,6 +12,7 @@ const CATEGORIES = [
     icon: ShieldCheck,
     sources: [
       { id: "bund10y", name: "Zinsumfeld 10Y AAA", provider: "EZB Yield Curve", desc: "Solvency-II Risk-Free Rate, daily aktualisiert", live: true, webhook: "bund10y" },
+      { id: "inflation-de", name: "Inflation Deutschland", provider: "EZB HICP", desc: "HICP YoY — Schadeninflation & Reservierungsbasis", live: true, webhook: "inflation-de" },
     ],
   },
   {
@@ -79,6 +80,16 @@ const SOURCE_OUTPUTS = {
     ],
     analysis: "Mock-Daten — Live-Backend liefert echte Versicherer-Analyse via EZB Yield Curve und KI (Solvency-II Risk-Free Rate, ALM-Empfehlungen).",
     subject: "Zinsumfeld-Briefing Euro AAA 10Y — Mai 2026",
+  },
+  "inflation-de": {
+    excelHeaders: ["Monat", "Inflation YoY", "Δ Vormonat", "ISO-Monat"],
+    excelRows: [
+      ["April 2026", "2,9 %", "+0,1 pp", "2026-04"],
+      ["März 2026", "2,8 %", "+0,8 pp", "2026-03"],
+      ["Februar 2026", "2,0 %", "-0,1 pp", "2026-02"],
+    ],
+    analysis: "Mock-Daten — Live-Backend liefert echte Versicherer-Analyse via EZB HICP-API und KI (Schadeninflation, Reservierungsrisiko, Beitragsanpassung).",
+    subject: "Inflations-Briefing Deutschland — Stand April 2026 (2,9 %)",
   },
   gold: {
     excelHeaders: ["Datum", "Gold USD/oz", "Δ Vortag", "30T-Trend"],
