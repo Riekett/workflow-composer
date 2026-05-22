@@ -13,6 +13,7 @@ const CATEGORIES = [
     sources: [
       { id: "bund10y", name: "Zinsumfeld 10Y AAA", provider: "EZB Yield Curve", desc: "Solvency-II Risk-Free Rate, daily aktualisiert", live: true, webhook: "bund10y" },
       { id: "inflation-de", name: "Inflation Deutschland", provider: "EZB HICP", desc: "HICP YoY — Schadeninflation & Reservierungsbasis", live: true, webhook: "inflation-de" },
+      { id: "konsumklima-de", name: "Konsumklima Deutschland", provider: "Eurostat CCI", desc: "Verbrauchervertrauen — Frühindikator für Neugeschäft & Storno", live: true, webhook: "konsumklima-de" },
     ],
   },
   {
@@ -90,6 +91,16 @@ const SOURCE_OUTPUTS = {
     ],
     analysis: "Mock-Daten — Live-Backend liefert echte Versicherer-Analyse via EZB HICP-API und KI (Schadeninflation, Reservierungsrisiko, Beitragsanpassung).",
     subject: "Inflations-Briefing Deutschland — Stand April 2026 (2,9 %)",
+  },
+  "konsumklima-de": {
+    excelHeaders: ["Monat", "CCI", "Δ Vormonat", "ISO-Monat"],
+    excelRows: [
+      ["April 2026", "-18,0", "-4,1 Pkt", "2026-04"],
+      ["März 2026", "-13,9", "-2,7 Pkt", "2026-03"],
+      ["Februar 2026", "-11,2", "-1,1 Pkt", "2026-02"],
+    ],
+    analysis: "Mock-Daten — Live-Backend liefert echte Versicherer-Vertriebs-Analyse via Eurostat Consumer Confidence Indicator und KI (Storno-Risiko, Neugeschäft, Vertriebssteuerung).",
+    subject: "Konsumklima-Briefing Deutschland — Stand April 2026 (-18,0 Pkt)",
   },
   gold: {
     excelHeaders: ["Datum", "Gold USD/oz", "Δ Vortag", "30T-Trend"],
